@@ -17,10 +17,21 @@ def encode_it(original_pass_string):
     encoded_string += str(num)
   return encoded_string
 
+# Nicholas Desmornes - ndesmornes@ufl.edu
+def decode(encoded_pass):
+    decoded_pass = ""
+
+    for num in encoded_pass:
+        # Shift int up by 10 and subtract 3. Only use last digit of 2-digit numbers.
+        decoded_pass += str((int(num) + 10 - 3) % 10)
+
+    return decoded_pass
+
 if __name__ == '__main__':
     selector = None
     encoded_pass = None
     original_pass = None
+    decoded_pass = None
     while selector != '3':
         print("Menu\n-------------")
         print('1. Encode')
@@ -30,10 +41,10 @@ if __name__ == '__main__':
         selector = input('Please enter an option: ')
         if selector == '1':
             original_pass = input('Please enter your password to encode: ')
-            # need function call here
             encoded_pass = encode_it(original_pass)
             print('Your password has been encoded and stored!\n')
             pass
         if selector == '2':
-            print(f'The encoded password is {encoded_pass}, and the original password is {original_pass}.\n')
+            decoded_pass = decode(encoded_pass)
+            print(f'The encoded password is {encoded_pass}, and the original password is {decoded_pass}.\n')
             pass
